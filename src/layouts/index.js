@@ -1,7 +1,7 @@
-import styles from './index.css';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu ,Breadcrumb} from 'antd';
+import { Component } from 'react';
 import Link from 'umi/link';
-import React from 'react';
+import styles from './index.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -10,69 +10,55 @@ const menuData = [
   { route: '/', name: '关于' },
 ];
 
-function BasicLayout(props) {
-  const {
-    location: { pathname },
-    children,
-  } = props;
 
-  return (
-    <Layout>
-      {/*<Header>*/}
-      {/*  <div className={styles.logo}>*/}
-      {/*    <Link to='/'>用户信息管理</Link>*/}
-      {/*  </div>*/}
-      {/*  <Menu*/}
-      {/*    theme="dark"*/}
-      {/*    mode="horizontal"*/}
-      {/*    defaultSelectedKeys={[pathname]}*/}
-      {/*    style={{ lineHeight: '64px' }}*/}
-      {/*  >*/}
-      {/*    {menuData.map(menu => (*/}
-      {/*      <Menu.Item key={`/${menu.route}`}>*/}
-      {/*        <Link to={menu.route}>{menu.name}</Link>*/}
-      {/*      </Menu.Item>*/}
-      {/*    ))}*/}
-      {/*  </Menu>*/}
-      {/*</Header>*/}
-      {/*<Content style={{ padding: '0 50px' }}>*/}
-      {/*  <div style={{ background: '#fff', padding: 10, minHeight: 480 }}>{children}</div>*/}
-      {/*</Content>*/}
-      {/*<Footer style={{ textAlign: 'center' }}>*/}
-      {/*  <a href='https://umijs.org/zh/'>Powered By react</a>*/}
-      {/*</Footer>*/}
+class BasicLayout extends Component {
+  state = {
+    collapsed: false,
+  };
 
-      <Header>
-        <div className={styles.logo}>
-          <Link to='/'>鲸信息管理</Link>
-        </div>
-      </Header>
-      <Layout>
-        <Sider>
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={[pathname]}
-            // style={}
-          >
-            {menuData.map(menu => (
-              <Menu.Item key={`/${menu.route}`}>
-                <Link to={menu.route}>{menu.name}</Link>
-              </Menu.Item>
-            ))}
-          </Menu>
-        </Sider>
-        <Content>
-          <div style={{ background: '#fff', padding: 10, minHeight: 480 }}>{children}</div>
-        </Content>
-        {/*<Sider>right sidebar</Sider>*/}
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
 
-        {/*<Footer style={{ textAlign: 'center' }}>*/}
-        {/*  <a href='https://umijs.org/zh/'>Powered By react</a>*/}
-        {/*</Footer>*/}
+
+  render() {
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
+        {/*头*/}
+        <Header>*/}
+          <div className={styles.logo}>
+            <Link to='/'>信息管理</Link>
+          </div>
+        </Header>
+        <Layout>
+          <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+            <div className="logo"/>
+            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+              {menuData.map(menu => (
+                <Menu.Item key={`/${menu.route}`}>
+                  <Link to={menu.route}>{menu.name}</Link>
+                </Menu.Item>
+              ))}
+            </Menu>
+          </Sider>
+          <Layout>
+            <Content style={{ margin: '0 16px' }}>
+              {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
+              {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}
+              {/*  <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
+              {/*</Breadcrumb>*/}
+              <div style={{ padding: 24, background: '#fff', minHeight: 120 }}>
+                {this.props.children}
+              </div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>Ant Design</Footer>
+          </Layout>
+        </Layout>
+
       </Layout>
-    </Layout>
-  );
+    );
+  }
 }
 
 export default BasicLayout;
