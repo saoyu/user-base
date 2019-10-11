@@ -1,4 +1,4 @@
-import { createUser, deleteUser, patchUser, queryUsers } from '../../../../services/api';
+import { createUser, deleteUser, patchUser, queryUsers } from '../../../services/user/api';
 
 export default {
   namespace: 'user',

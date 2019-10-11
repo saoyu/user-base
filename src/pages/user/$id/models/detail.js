@@ -1,7 +1,8 @@
-import { queryUser } from '../../../../../services/api';
+import { queryUser } from '../../../../services/user/api';
 
 
 const pathToRegexp = require('path-to-regexp');
+
 
 export default {
   namespace: 'userDetail',

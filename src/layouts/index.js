@@ -7,6 +7,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const menuData = [
   { route: '/user', name: '用户' },
+  { route: '/role', name: '角色' },
   { route: '/', name: '关于' },
 ];
 
